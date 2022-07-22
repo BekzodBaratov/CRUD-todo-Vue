@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <script defer src="https://unpkg.com/vue@3"></script>
+    <link rel="stylesheet" href="	https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" />
+    <script defer src="../dist/script.js"></script>
+
+    <title>crud Todo</title>
+  </head>
+  <body>
+    <div id="main">
+      <div class="p-2">
+        <div class="alert alert-danger text-center" v-if="error">{{this.errorHandler}}</div>
+        <div class="container">
+          <div class="row gap-5">
+            <div class="col">
+              <form @submit.prevent="prev" class="">
+                <div class="mb-3">
+                  <label for="name" class="form-label">Your Name</label>
+                  <input v-model="name" type="text" class="form-control" id="name" />
+                </div>
+                <div class="mb-0">
+                  <label for="email" class="form-label">Your Email</label>
+                  <input v-model="email" type="email" class="form-control" class="form-control" id="email" />
+                </div>
+                <div class="mb-3">
+                  <label for="job" class="form-label">Your Job</label>
+                  <input v-model="job" type="text" class="form-control" id="job" />
+                </div>
+                <button type="submit" @click="addUser" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+            <table class="table col">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Name</th>
+                  <th scope="col">Email</th>
+                  <th scope="col">job</th>
+                  <th scope="col">Update</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr v-for="user in reverseUsers">
+                  <th scope="row">{{user.id+1}}</th>
+                  <td>{{user.name}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.job}}</td>
+                  <td><button @click="updateUser(user.id)" class="btn btn-primary">Update</button></td>
+                  <td><button @click="deleteUser(user.id)" class="btn btn-danger">Delete</button></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
